@@ -1,10 +1,6 @@
-<p>
-  Logged in as <%= current_user.name %>
-  <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-</p>
-
 <% if @facade.current_organisation.present? %>
   <h1><%= @facade.current_organisation.name %></h1>
+  <%= link_to 'View shifts', user_shifts_path(current_user.id) %>
   <%= link_to 'Edit', edit_organisation_path(@facade.current_organisation.id) %>
   <%= button_to 'Leave', organisation_leave_path(user_id: current_user.id, organisation_id: @facade.current_organisation.id), method: :delete %>
 <% else %>

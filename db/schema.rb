@@ -10,14 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_22_005710) do
+ActiveRecord::Schema.define(version: 2019_12_23_155206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "organisation_users", force: :cascade do |t|
+    t.bigint "organisation_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["organisation_id"], name: "index_organisation_users_on_organisation_id"
+    t.index ["user_id", "organisation_id"], name: "unique_index_organisation_users", unique: true
+    t.index ["user_id"], name: "index_organisation_users_on_user_id"
+  end
+
   create_table "organisations", force: :cascade do |t|
     t.string "name", null: false
     t.integer "hourly_rate_in_cents", null: false
+  end
+
+  create_table "shifts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "start", null: false
+    t.datetime "finish", null: false
+    t.integer "break_length_in_minutes", default: 0, null: false
+    t.index ["user_id"], name: "index_shifts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -33,4 +49,5 @@ ActiveRecord::Schema.define(version: 2019_12_22_005710) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "shifts", "users"
 end

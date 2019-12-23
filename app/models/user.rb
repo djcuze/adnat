@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :organisation_users
   has_many :organisations, through: :organisation_users
+  has_many :shifts
 end

@@ -1,0 +1,26 @@
+<h1><%= @facade.organisation.name %></h1>
+<h2>Shifts</h2>
+
+<table>
+  <thead>
+  <tr>
+    <th>Employee name</th>
+    <th>Shift date</th>
+    <th>Start time</th>
+    <th>Finish time</th>
+    <th>Break length (minutes)</th>
+    <th>Hours worked</th>
+    <th>Shift cost</th>
+  </tr>
+  </thead>
+  <% @facade.shifts.each do |shift| %>
+    <tr>
+      <td><%= shift.user.name %></td>
+      <td><%= shift.start.to_date %></td>
+      <td><%= shift.start.to_time %></td>
+      <td><%= shift.finish.to_time %></td>
+      <td><%= shift.break_length_in_minutes %></td>
+      <td><%= 'Calculate shift cost' %></td>
+    </tr>
+  <% end %>
+</table>

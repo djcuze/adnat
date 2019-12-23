@@ -12,8 +12,13 @@ class LeaveOrganisationForm < BaseForm
 
   def persist
     Organisation.transaction do
+      cancel_shifts_for_user
       leave_organisation
     end
+  end
+
+  def cancel_shifts_for_user
+    Shift.where(user_id: user_id).delete_all
   end
 
   def leave_organisation

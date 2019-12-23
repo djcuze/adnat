@@ -20,6 +20,12 @@ RSpec.describe LeaveOrganisationForm do
         it 'deletes the record' do
           expect { save_form }.to change(OrganisationUser, :count).by(-1)
         end
+        context 'when user has a shift' do
+          let!(:shift) { Shift.create(user: user, start: DateTime.now, finish: DateTime.now, break_length_in_minutes: 25) }
+          it 'deletes the shift record' do
+            expect { save_form }.to change(Shift, :count).by(-1)
+          end
+        end
       end
       context 'when no organisation user exists' do
         it('fails') { is_expected.to be_falsey }
