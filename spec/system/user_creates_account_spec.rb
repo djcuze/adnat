@@ -5,6 +5,7 @@ RSpec.describe 'User registers a new account', type: :system do
     it_requires_login
     it_registers_for_a_new_account
     it_creates_an_organisation
+    it_edits_an_organisation
   end
 
   private
@@ -34,6 +35,19 @@ RSpec.describe 'User registers a new account', type: :system do
 
     within '.organisations-list' do
       page.has_content? 'Beats R Us'
+    end
+  end
+
+  def it_edits_an_organisation
+    within '.organisations-list' do
+      click_link 'Edit'
+    end
+    fill_in 'Name', with: 'MusicLand'
+    click_button 'Save changes'
+
+    within '.organisations-list' do
+      page.has_no_content? 'Beats R Us'
+      page.has_content? 'MusicLand'
     end
   end
 end
