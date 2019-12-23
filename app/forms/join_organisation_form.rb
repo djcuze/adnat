@@ -3,6 +3,7 @@ class JoinOrganisationForm < BaseForm
   attribute :organisation_id, Integer
 
   validates :user_id, :organisation_id, presence: true
+  validate :organisation_not_already_joined?
 
   private
 
@@ -14,5 +15,11 @@ class JoinOrganisationForm < BaseForm
 
   def add_user_to_organisation
     @add_user_to_organisation ||= OrganisationUser.create(attributes)
+  end
+
+  def organisation_not_already_joined?
+    return unless OrganisationUser.exists?(attributes)
+
+    errors.add(:base, I18n.t('organisation.join.error'))
   end
 end
