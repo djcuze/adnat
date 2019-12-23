@@ -16,11 +16,12 @@
   <% @facade.shifts.each do |shift| %>
     <tr>
       <td><%= shift.user.name %></td>
-      <td><%= shift.start.to_date %></td>
-      <td><%= shift.start.to_time %></td>
-      <td><%= shift.finish.to_time %></td>
+      <td><%= shift.start.strftime('%d/%m/%Y') %></td>
+      <td><%= shift.start.strftime('%-I:%M%P') %></td>
+      <td><%= shift.finish.strftime('%-I:%M%P') %></td>
       <td><%= shift.break_length_in_minutes %></td>
-      <td><%= 'Calculate shift cost' %></td>
+      <td><%= "TODO: Calculate Hours Worked" %></td>
+      <td><%= 'TODO: Calculate shift cost' %></td>
     </tr>
   <% end %>
 </table>
