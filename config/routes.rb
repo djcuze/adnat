@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   devise_for :users
 
   root to: 'dashboard#index'
+
+  resources :organisations, only: %i[edit update new create]
 end

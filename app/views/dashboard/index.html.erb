@@ -1,4 +1,17 @@
 <p>
   Logged in as <%= current_user.name %>
-  <%= link_to "Logout", destroy_user_session_path, method: :delete  %>
+  <%= link_to "Logout", destroy_user_session_path, method: :delete %>
 </p>
+
+<h2>Organisations</h2>
+<ul class="organisations-list">
+  <% @facade.organisations.each do |organisation| %>
+    <li>
+      <%= organisation.name %>
+      <%= link_to 'Edit', edit_organisation_path(organisation.id) %>
+    </li>
+  <% end %>
+</ul>
+
+<h2>Create organisation</h2>
+<%= render 'organisations/new', form: @facade.new_organisation_form %>
