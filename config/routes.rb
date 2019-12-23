@@ -7,5 +7,7 @@ Rails.application.routes.draw do
 
   root to: 'dashboard#index'
 
-  resources :organisations, only: %i[edit update new create]
+  resources :organisations, only: %i[edit update new create] do
+    post :users, to: 'organisations/users#create'
+  end
 end

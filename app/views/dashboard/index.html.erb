@@ -3,15 +3,20 @@
   <%= link_to "Logout", destroy_user_session_path, method: :delete %>
 </p>
 
-<h2>Organisations</h2>
-<ul class="organisations-list">
-  <% @facade.organisations.each do |organisation| %>
-    <li>
-      <%= organisation.name %>
-      <%= link_to 'Edit', edit_organisation_path(organisation.id) %>
-    </li>
-  <% end %>
-</ul>
+<% if @facade.current_organisation.present? %>
+  <h1><%= 'Logged into organisation: ' + @facade.current_organisation.name %></h1>
+<% else %>
+  <h2>Organisations</h2>
+  <ul class="organisations-list">
+    <% @facade.organisations.each do |organisation| %>
+      <li>
+        <%= organisation.name %>
+        <%= link_to 'Edit', edit_organisation_path(organisation.id) %>
+        <%= button_to 'Join', organisation_users_path(user_id: current_user.id, organisation_id: organisation.id), method: :post %>
+      </li>
+    <% end %>
+  </ul>
 
-<h2>Create organisation</h2>
-<%= render 'organisations/new', form: @facade.new_organisation_form %>
+  <h2>Create organisation</h2>
+  <%= render 'organisations/new', form: @facade.new_organisation_form %>
+<% end %>
