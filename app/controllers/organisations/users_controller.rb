@@ -7,6 +7,13 @@ module Organisations
       redirect_to root_path
     end
 
+    def destroy
+      @facade ||= ::Organisations::LeaveFacade.new(join_organisation_params)
+      return unless @facade.form.save
+
+      redirect_to root_path
+    end
+
     private
 
     def join_organisation_params

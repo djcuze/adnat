@@ -12,16 +12,22 @@ RSpec.describe 'User joins an organisation', type: :system do
   end
 
   it do
-    it_edits_an_organisation
+    it_joins_an_organisation
+    it_leaves_organisation
   end
 
   private
 
-  def it_edits_an_organisation
+  def it_joins_an_organisation
     within '.organisations-list' do
       click_button 'Join'
     end
 
     page.has_content? "Logged into organisation: #{organisation.name}"
+  end
+
+  def it_leaves_organisation
+    click_button 'Leave'
+    page.has_content? "Create organisation"
   end
 end

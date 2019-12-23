@@ -4,7 +4,9 @@
 </p>
 
 <% if @facade.current_organisation.present? %>
-  <h1><%= 'Logged into organisation: ' + @facade.current_organisation.name %></h1>
+  <h1><%= @facade.current_organisation.name %></h1>
+  <%= link_to 'Edit', edit_organisation_path(@facade.current_organisation.id) %>
+  <%= button_to 'Leave', organisation_leave_path(user_id: current_user.id, organisation_id: @facade.current_organisation.id), method: :delete %>
 <% else %>
   <h2>Organisations</h2>
   <ul class="organisations-list">

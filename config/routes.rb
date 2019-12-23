@@ -9,5 +9,6 @@ Rails.application.routes.draw do
 
   resources :organisations, only: %i[edit update new create] do
     post :users, to: 'organisations/users#create'
+    delete :user, to: 'organisations/users#destroy', as: :leave
   end
 end
