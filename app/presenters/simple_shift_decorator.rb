@@ -25,8 +25,4 @@ class SimpleShiftDecorator < SimpleDelegator
   def hours_worked
     CalculateHoursWorked.in_hours(self)
   end
-
-  def cost
-    0
-  end
 end

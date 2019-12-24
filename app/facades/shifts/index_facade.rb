@@ -16,6 +16,10 @@ module Shifts
       @form ||= NewShiftForm.new
     end
 
+    def calculate_shift_cost(shift)
+      CalculateShiftCost.call(shift, organisation)
+    end
+
     private
 
     def fetch_shifts

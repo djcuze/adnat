@@ -22,7 +22,7 @@
         <td><%= shift.finish_time %></td>
         <td><%= shift.break_length_in_minutes %></td>
         <td><%= shift.hours_worked %></td>
-        <td><%= number_to_currency(shift.cost) %></td>
+        <td><%= number_to_currency(@facade.calculate_shift_cost(shift)) %></td>
       </tr>
     <% end %>
   <% else %>
