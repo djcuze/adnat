@@ -15,13 +15,13 @@
   </thead>
   <% @facade.shifts.each do |shift| %>
     <tr>
-      <td><%= shift.user.name %></td>
-      <td><%= shift.start.strftime('%d/%m/%Y') %></td>
-      <td><%= shift.start.strftime('%-I:%M%P') %></td>
-      <td><%= shift.finish.strftime('%-I:%M%P') %></td>
+      <td><%= shift.employee_name %></td>
+      <td><%= shift.date %></td>
+      <td><%= shift.start_time %></td>
+      <td><%= shift.finish_time %></td>
       <td><%= shift.break_length_in_minutes %></td>
-      <td><%= CalculateHoursWorked.in_hours(shift) %></td>
-      <td><%= 'TODO: Calculate shift cost' %></td>
+      <td><%= shift.hours_worked %></td>
+      <td><%= number_to_currency(shift.cost) %></td>
     </tr>
   <% end %>
 </table>
