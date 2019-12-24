@@ -12,6 +12,10 @@ module Shifts
       @organisation ||= @current_user.organisations.first
     end
 
+    def form
+      @form ||= NewShiftForm.new
+    end
+
     private
 
     def fetch_shifts

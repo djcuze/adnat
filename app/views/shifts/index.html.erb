@@ -13,16 +13,54 @@
     <th>Shift cost</th>
   </tr>
   </thead>
-  <% @facade.shifts.each do |shift| %>
+  <% if @facade.shifts.any? %>
+    <% @facade.shifts.each do |shift| %>
+      <tr>
+        <td><%= shift.employee_name %></td>
+        <td><%= shift.date %></td>
+        <td><%= shift.start_time %></td>
+        <td><%= shift.finish_time %></td>
+        <td><%= shift.break_length_in_minutes %></td>
+        <td><%= shift.hours_worked %></td>
+        <td><%= number_to_currency(shift.cost) %></td>
+      </tr>
+    <% end %>
+  <% else %>
     <tr>
-      <td><%= shift.employee_name %></td>
-      <td><%= shift.date %></td>
-      <td><%= shift.start_time %></td>
-      <td><%= shift.finish_time %></td>
-      <td><%= shift.break_length_in_minutes %></td>
-      <td><%= shift.hours_worked %></td>
-      <td><%= number_to_currency(shift.cost) %></td>
+      <td colspan="7" style="text-align: center;">No results</td>
     </tr>
   <% end %>
 </table>
 
+<hr>
+
+<h2>Create Shift</h2>
+<%= form_for @facade.form, url: user_shifts_path do |f| %>
+  <div id="form-errors"></div>
+
+  <div class="form-group">
+    <%= f.label :shift_date %>
+    <%= f.text_field :shift_date, required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :shift_start, 'Start time' %>
+    <%= f.time_select :shift_start, required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :shift_finish, 'Finish time' %>
+    <%= f.time_select :shift_finish, required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :break_length_in_minutes, 'Break length (in minutes)' %>
+    <%= f.number_field :break_length_in_minutes, required: true %>
+  </div>
+
+  <%= f.submit 'Save' %>
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+  datepickr(document.getElementById('new_shift_form_shift_date'))
+</script>

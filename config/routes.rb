@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   root to: 'dashboard#index'
 
   resources :users, only: [] do
-    resources :shifts, only: :index
+    resources :shifts, only: %i[index create]
   end
 
   resources :organisations, only: %i[edit update new create] do

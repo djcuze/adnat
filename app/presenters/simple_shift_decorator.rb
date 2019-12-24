@@ -11,15 +11,15 @@ class SimpleShiftDecorator < SimpleDelegator
   end
 
   def date
-    start.strftime('%d/%m/%Y')
+    start.in_time_zone('Australia/Brisbane').strftime('%d/%m/%Y')
   end
 
   def start_time
-    start.strftime('%-I:%M%P')
+    start.in_time_zone('Australia/Brisbane').strftime('%-I:%M%P')
   end
 
   def finish_time
-    finish.strftime('%-I:%M%P')
+    finish.in_time_zone('Australia/Brisbane').strftime('%-I:%M%P')
   end
 
   def hours_worked
