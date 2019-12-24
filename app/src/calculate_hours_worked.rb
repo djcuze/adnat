@@ -5,7 +5,7 @@ class CalculateHoursWorked
     end
 
     def in_hours(shift)
-      in_minutes(shift) / 60
+      (in_minutes(shift) / 60).round(2)
     end
   end
 end

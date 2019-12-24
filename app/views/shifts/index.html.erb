@@ -20,8 +20,9 @@
       <td><%= shift.start.strftime('%-I:%M%P') %></td>
       <td><%= shift.finish.strftime('%-I:%M%P') %></td>
       <td><%= shift.break_length_in_minutes %></td>
-      <td><%= "TODO: Calculate Hours Worked" %></td>
+      <td><%= CalculateHoursWorked.in_hours(shift) %></td>
       <td><%= 'TODO: Calculate shift cost' %></td>
     </tr>
   <% end %>
 </table>
+
